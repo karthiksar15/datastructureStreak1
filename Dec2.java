@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,7 +14,12 @@ public class Dec2 {
 
         int[] nums = { -4, -1, 0, 3, 10 };
         int[] result = sortedSquares(nums);
-        IntStream.of(result).forEach(System.out::print);
+        int[] resultStreams = sortedSquaresUsingStreams(nums);
+        String resultString = Arrays.stream(result).mapToObj(String::valueOf).collect(Collectors.joining(","));
+        String resultStreamsString = Arrays.stream(resultStreams).mapToObj(String::valueOf)
+                .collect(Collectors.joining(","));
+        System.out.println(resultString);
+        System.out.println(resultStreamsString);
     }
 
     public static int[] sortedSquares(int[] nums) {
@@ -34,6 +40,10 @@ public class Dec2 {
             index--;
         }
         return result;
+    }
+
+    public static int[] sortedSquaresUsingStreams(int[] nums) {
+        return Arrays.stream(nums).map(x -> x * x).sorted().toArray();
     }
 
 }
