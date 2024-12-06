@@ -1,5 +1,10 @@
 public class Dec6 {
 
+    /**
+     * The main method of the Dec6 class demonstrates the minStartValue method.
+     * It creates an array of integers and prints the minimum start value required
+     * for the running sum of the array to remain positive.
+     */
     public static void main(String[] args) {
         int[] nums = { -3, 2, -3, 4, 2 };
         System.out.println(minStartValue(nums));
