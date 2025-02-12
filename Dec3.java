@@ -9,25 +9,40 @@ public class Dec3 {
         System.out.println("avg found--" + avg);
     }
 
+    /**
+     * Finds the maximum average of a subarray of size k from the given array of
+     * integers.
+     * 
+     * @param nums the array of integers
+     * @param k    the size of the subarray
+     * @return the maximum average of the subarray
+     */
     public static double findAverage(int[] nums, int k) {
-        double max = 0;
         int left = 0;
         int right = k;
         double sum = 0;
-        while (right <= nums.length) {
-            sum = 0;
-            for (int i = left; i < right; i++) {
-                sum = sum + nums[i];
-            }
-            double avgTemp = sum / k;
-            if (avgTemp > max) {
-                max = avgTemp;
-                System.out.println("inside left-->" + left);
-            }
-            left++;
-            right = left + k;
+        for (int i = left; i < right; i++) {
+            sum += sum + nums[i];
         }
-        return max;
+        double result = sum;
+        for (int i = right; i < nums.length; i++) {
+            sum += nums[i] - nums[i - k];
+            result = Math.max(sum, result);
+        }
+        // while (right <= nums.length) {
+        // sum = 0;
+        // for (int i = left; i < right; i++) {
+        // sum = sum + nums[i];
+        // }
+        // double avgTemp = sum / k;
+        // if (avgTemp > max) {
+        // max = avgTemp;
+        // System.out.println("inside left-->" + left);
+        // }
+        // left++;
+        // right = left + k;
+        // }
+        return result / k;
 
     }
 
