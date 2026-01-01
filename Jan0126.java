@@ -41,7 +41,7 @@ public class Jan0126 {
     }
 
     public boolean isValid(int row, int col, char[][] grid) {
-        return (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length);
+        return (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length  && grid[row][col] != '+');
     }
 
     public boolean isBorder(int row, int col, char[][] grid) {
