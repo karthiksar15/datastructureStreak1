@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Jan0326 {
@@ -14,38 +15,60 @@ public class Jan0326 {
 
     public int snakesAndLadders(int[][] board) {
         int n = board.length;
-        Pair<Integer, Integer>[] cells = new Pair[(n * n) + 1];
-        int[] columns = new int[n];
+        // Pair<Integer, Integer>[] cells = new Pair[(n * n) + 1];
+        Pair[] cells = new Pair[n * n + 1];
+        Integer[] columns = new Integer[n];
         for (int i = 0; i < n; i++) {
             columns[i] = i;
         }
         int label = 1;
         for (int i = n - 1; i >= 0; i--) {
             for (int column : columns) {
-                cells[label] = new Pair(i, column);
+                cells[label++] = new Pair(i, column);
             }
             Collections.reverse(Arrays.asList(columns));
         }
         int[] dist = new int[(n * n) + 1];
         Arrays.fill(dist, -1);
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(1);
+        PriorityQueue<Vertex> queue = new PriorityQueue();
+        queue.add(new Vertex(0, 1));
         dist[1] = 0;
         while (!queue.isEmpty()) {
-            int curr = queue.poll();
+            Vertex temp = queue.poll();
+            int d = temp.distance;
+            int curr = temp.label;
+            if (d != dist[curr]) {
+                continue;
+            }
             for (int next = curr + 1; next <= Math.min(n * n, curr + 6); next++) {
                 int row = cells[next].row1, column = cells[next].column1;
                 int destination = board[row][column] != -1 ? board[row][column] : next;
                 if (dist[destination] == -1) {
                     dist[destination] = dist[curr] + 1;
-                    queue.add(destination);
+                    queue.add(new Vertex(dist[destination], destination));
                 }
             }
         }
         return dist[n * n];
     }
 
-    record Pair<K, V>(K row1, V column1) {
+    record Pair<K, V>(Integer row1, Integer column1) {
     };
+
+    class Vertex implements Comparable<Vertex> {
+        Integer label;
+        Integer distance;
+
+        public Vertex(Integer distance, Integer label) {
+            this.label = label;
+            this.distance = distance;
+        }
+
+        @Override
+        public int compareTo(Vertex v) {
+            return this.distance - v.distance;
+        }
+
+    }
 
 }
