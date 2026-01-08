@@ -10,20 +10,21 @@ class Jan0826 {
     }
 
     public boolean canReach(int[] arr, int start) {
-        int target = 0;
+       int target = 0;
         int[] change = { -1, 1 };
         Queue<Integer> queue = new LinkedList();
+        boolean[] visited = new boolean[arr.length];
         queue.add(start);
+        visited[start] = true;
         while (!queue.isEmpty()) {
             Integer temp = queue.poll();
             if (arr[temp] == target)
                 return true;
             for (int i : change) {
-                int newIndex = Math.abs(temp + (i * arr[temp]));
-                if (newIndex >= 0 && newIndex < arr.length && newIndex != start) {
+                int newIndex = temp + (i * arr[temp]);
+                if (newIndex >= 0 && newIndex < arr.length && (!visited[newIndex])) {
                     queue.add(newIndex);
-                } else if (newIndex == start) {
-                    return false;
+                    visited[newIndex] = true;
                 }
             }
         }
