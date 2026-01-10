@@ -17,52 +17,45 @@ public class Jan1026 {
     }
 
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        Map<Integer, List<Character>> map = new HashMap<>();
-        int n = beginWord.length();
-        int count = 0;
-        if (!wordList.contains(endWord))
-            return count;
-        for (int i = 0; i < wordList.size(); i++) {
-            for (int j = 0; j < n; j++) {
-                Character eachChar = wordList.get(i).charAt(j);
-                map.computeIfAbsent(j, k -> new ArrayList<>()).add(eachChar);
-            }
 
-        }
-        Queue<Vertex> queue = new LinkedList<>();
-        queue.add(new Vertex(beginWord, count + 1));
+        if (beginWord == null || endWord == null)
+            return 0;
+        if (beginWord.length() != endWord.length())
+            return 0;
+
+        Set<String> dict = new HashSet<>(wordList);
+        if (!dict.contains(endWord))
+            return 0;
+
+        int count = 1;
+        Queue<String> queue = new LinkedList<>();
+        queue.add(beginWord);
         Set<String> visited = new HashSet<>();
         visited.add(beginWord);
-
         while (!queue.isEmpty()) {
-            Vertex word = queue.poll();
-
-            if (word.word.equals(endWord))
-                return word.count;
-
-            for (int i = 0; i < n; i++) {
-                for (char val : map.get(i)) {
-                    String newStr = word.word.substring(0, i) + val + word.word.substring(i + 1);
-                    if (!visited.contains(newStr) && wordList.contains(newStr)) {
-                        queue.add(new Vertex(newStr, word.count + 1));
-                        visited.add(newStr);
+            int size = queue.size();
+            for (int s = 0; s < size; s++) {
+                String word = queue.poll();
+                if (word.equals(endWord))
+                    return count;
+                char[] wordArr = word.toCharArray();
+                for (int i = 0; i < wordArr.length; i++) {
+                    char original = wordArr[i];
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        if (wordArr[i] == c)
+                            continue;
+                        wordArr[i] = c;
+                        String next = new String(wordArr);
+                        if (visited.add(next) && wordList.contains(next)) {
+                            queue.add(next);
+                        }
                     }
+                    wordArr[i] = original;
                 }
             }
-
+            count++;
         }
         return count;
-
-    }
-
-    class Vertex {
-        int count;
-        String word;
-
-        public Vertex(String word, int count) {
-            this.word = word;
-            this.count = count;
-        }
     }
 
 }
