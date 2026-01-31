@@ -7,8 +7,8 @@ public class Jan29263 {
 
     public static void main(String[] args) {
         Jan29263 jan = new Jan29263();
-        String startGene = "AACCGGTT", endGene = "AACCGGTA";
-        String[] bank = { "AACCGGTA" };
+        String startGene = "AACCGGTT", endGene = "AAACGGTA";
+        String[] bank = { "AACCGGTA", "AACCGCTA", "AAACGGTA" };
         System.out.println("number of mutations-->" + jan.minMutation(startGene, endGene, bank));
     }
 
@@ -21,26 +21,41 @@ public class Jan29263 {
             return -1;
         Set<String> visited = new HashSet<>();
         visited.add(startGene);
-        Deque<Mutate> queue = new LinkedList<>();
-        queue.add(new Mutate(startGene, 0));
+        visited.add(endGene);
+        Set<String> beginSet = new HashSet<>();
+        beginSet.add(startGene);
+        Set<String> endSet = new HashSet<>();
+        endSet.add(endGene);
+
         char[] chars = { 'A', 'C', 'G', 'T' };
-        while (!queue.isEmpty()) {
-            Mutate temp = queue.poll();
-            if (temp.word.equalsIgnoreCase(endGene))
-                return temp.score;
-            if (temp.score < temp.word.length()) {
-                for (int i = 0; i < chars.length; i++) {
-                    char[] toChar = temp.word.toCharArray();
-                    if (toChar[temp.score] == chars[i])
-                        continue;
-                    toChar[temp.score] = chars[i];
-                    String mutatedStr = new String(toChar);
-                    if (visited.add(mutatedStr)) {
-                        queue.add(new Mutate(mutatedStr, temp.score + 1));
+        int n = startGene.length();
+        int score = 1;
+        while (!beginSet.isEmpty() && !endSet.isEmpty()) {
+            if (beginSet.size() > endSet.size()) {
+                Set<String> temp = endSet;
+                endSet = beginSet;
+                beginSet = temp;
+            }
+            Set<String> nextLevel = new HashSet<>();
+            for (String str : beginSet) {
+                char[] charArr = str.toCharArray();
+                for (int i = 0; i < n; i++) {
+                    char original = charArr[i];
+                    for (int j = 0; j < chars.length; j++) {
+                        if (original == chars[j])
+                            continue;
+                        charArr[i] = chars[j];
+                        String newWord = new String(charArr);
+                        if (endSet.contains(newWord))
+                            return score;
+                        if (dict.contains(newWord) && visited.add(newWord))
+                            nextLevel.add(newWord);
                     }
+                    charArr[i] = original;
                 }
             }
-
+            beginSet = nextLevel;
+            score++;
         }
         return -1;
 
