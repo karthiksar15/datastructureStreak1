@@ -1,0 +1,31 @@
+import java.util.Stack;
+
+public class May19261 {
+
+    public static void main(String[] args) {
+        int[] asteroids = { 2, 4, -4, -1 };
+        May19261 may = new May19261();
+        System.out.println("asteroid collision--->" + may.asteroidCollision(asteroids));
+    }
+
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack<Integer> stack = new Stack<>();
+        for (int a : asteroids) {
+            while (!stack.isEmpty() && a < 0 && stack.peek() > 0) {
+                int diff = a + stack.peek();
+                if (diff < 0) {
+                    stack.pop();
+                } else if (diff > 0) {
+                    a = 0;
+                } else {
+                    a = 0;
+                    stack.pop();
+                }
+            }
+            if (a != 0)
+                stack.push(a);
+        }
+        return stack.stream().mapToInt(i -> i).toArray();
+    }
+
+}
