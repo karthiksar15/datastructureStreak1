@@ -26,6 +26,9 @@ public class Jun2326 {
         }
         int last = n - 1;
         dp[last][0] = Math.max(dp[last - 1][0], dp[last - 2][0] + nums[last]);
+
+        dp[last][1] = dp[last - 1][1];
+        return Math.max(dp[last][0], dp[last][1]);
     }
 
 }
