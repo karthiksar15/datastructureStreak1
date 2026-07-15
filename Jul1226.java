@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Jul1226 {
 
@@ -10,7 +12,10 @@ public class Jul1226 {
     }
 
     public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> res = new ArrayList<>();
+        for (int[] interval : intervals) {
 
+        }
     }
 
 }
