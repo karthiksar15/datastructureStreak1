@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -6,7 +7,7 @@ class Jul18261 {
 
     public static void main(String[] args) {
         Jul18261 jul = new Jul18261();
-        List<Interval> intervals = List.of(jul.new Interval(5, 10), jul.new Interval(15, 20));
+        List<Interval> intervals = new ArrayList<>(List.of(jul.new Interval(5, 10), jul.new Interval(15, 20)));
         System.out.println("canAttendMeeting--->" + jul.canAttendMeetings(intervals));
     }
 
