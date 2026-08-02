@@ -4,7 +4,7 @@ public class Jul2626 {
 
     public static void main(String[] args) {
         int[][] intervals = { { 1, 3 }, { 1, 5 }, { 6, 7 } };
-        Jul2526 jul = new Jul2526();
+        Jul2626 jul = new Jul2626();
         System.out.println("merge--->" + Arrays.deepToString(jul.merge(intervals)));
     }
 
@@ -45,7 +45,7 @@ public class Jul2626 {
         for (int i = 0; i < r; i++) {
             res[i] = intervals[i];
         }
-        return intervals;
+        return res;
     }
 
 }
