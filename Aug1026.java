@@ -20,10 +20,23 @@ public class Aug1026 {
         }
         int[] count = new int[n];
         for (int[] meeting : meetings) {
-            int start=meeting[0];
-            int end=meeting[1];
-            if(!pq.isEmpty() && pq.peek()[1])
+            int start = meeting[0];
+            int end = meeting[1];
+            while (!pq.isEmpty() && pq.peek()[0] < start) {
+                int[] earliest = pq.poll();
+                pq.offer(new int[] { start, earliest[1] });
+            }
+            int[] room = pq.poll();
+            int endTime = room[0] + (end - start);
+            pq.offer(new int[] { endTime, room[1] });
+            count[(int) room[1]]++;
         }
+        int maxRoom = 0;
+        for (int i = 1; i < n; i++) {
+            if (count[i] > count[maxRoom])
+                maxRoom = i;
+        }
+        return maxRoom;
     }
 
 }
