@@ -1,59 +1,48 @@
-public class Trial6 {
-
-    public static int found;
+public class Jan2 {
 
     public static void main(String[] args) {
-        Trial6 t6 = new Trial6();
-        TreeNode node1 = t6.new TreeNode(3);
-        TreeNode node2 = t6.new TreeNode(5);
-        TreeNode node3 = t6.new TreeNode(1);
-        node1.left = node2;
-        node1.right = node3;
-        TreeNode node4 = t6.new TreeNode(6);
-        TreeNode node5 = t6.new TreeNode(2);
-        node2.left = node4;
-        node2.right = node5;
-        TreeNode node6 = t6.new TreeNode(7);
-        TreeNode node7 = t6.new TreeNode(4);
-        node5.left = node6;
-        node5.right = node7;
-        TreeNode node8 = t6.new TreeNode(0);
-        TreeNode node9 = t6.new TreeNode(8);
-        node3.left = node8;
-        node3.right = node9;
-        System.out.println("lca found---" + findLca(node1, 6, 2));
+        NodeList NodeList1 = new NodeList(1);
+        NodeList NodeList2 = new NodeList(2);
+        NodeList1.next = NodeList2;
+        NodeList NodeList3 = new NodeList(3);
+        NodeList2.next = NodeList3;
+        NodeList NodeList4 = new NodeList(4);
+        NodeList3.next = NodeList4;
+        NodeList NodeList5 = new NodeList(5);
+        NodeList4.next = NodeList5;
+        NodeList NodeList6 = new NodeList(6);
+        NodeList5.next = NodeList6;
+        System.out.println(findMiddle(NodeList1).val);
 
     }
 
-    public static int findLca(TreeNode t1, int n1, int n2) {
-        if (t1 == null) {
-            return 0;
+    public static NodeList findMiddle(NodeList head) {
+        NodeList slowPtr = head;
+        NodeList fastPtr = head;
+        while (fastPtr != null && fastPtr.next != null) {
+            slowPtr = slowPtr.next;
+            fastPtr = fastPtr.next.next;
         }
-        if (t1.val == n1 || t1.val == n2)
-            return t1.val;
-        int left = findLca(t1.left, n1, n2);
-        int right = findLca(t1.right, n1, n2);
-
-        if (left != 0 && right != 0) {
-            return t1.val;
-        }
-
-        if (left != 0)
-            return left;
-        // found = found != 0 ? found : ();
-        // return found;
-        return right;
+        return slowPtr;
     }
 
-    class TreeNode {
-        public int val;
-        public TreeNode left;
-        public TreeNode right;
+}
 
-        public TreeNode(int val) {
-            this.val = val;
-        }
+class NodeList {
+    public Integer val;
+    public NodeList next;
+
+    public NodeList() {
     }
 
+    public NodeList(Integer val) {
+        this.val = val;
+        this.next = null;
+    }
+
+    // @Override
+    // public String toString() {
+    // return new StringBuilder().append(String.valueOf(this.val)).toString();
+    // }
 }
 
