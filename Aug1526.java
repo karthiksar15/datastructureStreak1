@@ -16,11 +16,19 @@ public class Aug1526 {
         int[][] dp = new int[n + 1][n + 1];
         for (int i = n - 1; i >= 0; i--) {
             for (int m = 1; m <= n; m++) {
-                for (int x = 1; x <= 2 * m; x++) {
-                    if (i + x > n)
-                        break;
-                    dp[i][m] = Math.max(dp[i][m], suffixSum[i] - dp[i + x][Math.max(m, x)]);
+                if (i + 2 * m >= n)
+                    dp[i][m] = suffixSum[i];
+                else {
+                    for (int x = 1; x <= 2 * m; x++) {
+                        int opp = dp[i + 1][Math.max(m, x)];
+                        dp[i][m] = Math.max(dp[i][m], suffixSum[i] - opp);
+                    }
                 }
+                // for (int x = 1; x <= 2 * m; x++) {
+                // if (i + x > n)
+                // break;
+                // dp[i][m] = Math.max(dp[i][m], suffixSum[i] - dp[i + x][Math.max(m, x)]);
+                // }
             }
         }
         return dp[0][1];
