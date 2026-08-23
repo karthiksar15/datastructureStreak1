@@ -17,7 +17,7 @@ public class Aug2026 {
             for (int c = 0; c < COL; c++) {
                 for (int[] d : directions) {
                     int nr = r + d[0], nc = c + d[1];
-                    if (nr > 0 && nr < ROW && nc > 0 && nc < COL && matrix[nr][nc] < matrix[r][c]) {
+                    if (nr >= 0 && nr < ROW && nc >= 0 && nc < COL && matrix[nr][nc] < matrix[r][c]) {
                         indegree[r][c]++;
                     }
                 }
@@ -34,8 +34,21 @@ public class Aug2026 {
         int LIS = 0;
         while (!q.isEmpty()) {
             int size = q.size();
-
+            for (int i = 0; i < size; i++) {
+                int[] temp = q.poll();
+                int r = temp[0], c = temp[1];
+                for (int[] d : directions) {
+                    int nr = r + d[0], nc = c + d[1];
+                    if (nr >= 0 && nr < ROW && nc >= 0 && nc < COL && matrix[nr][nc] > matrix[r][c]) {
+                        if (--indegree[nr][nc] == 0) {
+                            q.offer(new int[] { nr, nc });
+                        }
+                    }
+                }
+            }
+            LIS++;
         }
+        return LIS;
     }
 
 }
