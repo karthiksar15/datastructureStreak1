@@ -6,6 +6,9 @@ class Aug3026 {
         System.out.println("findTarget--->" + aug.findTargetSumWays(nums, target));
     }
 
+    // This transition logic (dp[i - 1][j - nums[i - 1]]) represents the 0/1
+    // Knapsack problem, where you can use each item (or nums) at most once.
+
     public int findTargetSumWays(int[] nums, int target) {
         int n = nums.length;
         int sum = 0;
@@ -29,3 +32,14 @@ class Aug3026 {
         return dp[n][target];
     }
 }
+
+// o/p:
+// 2D array
+// +---------+-----+-----+-----+-----+-----+
+// | Index | 0 | 1 | 2 | 3 | 4 |
+// +---------+-----+-----+-----+-----+-----+
+// | Row 0 | 1 | 0 | 0 | 0 | 0 |
+// | Row 1 | 1 | 0 | 1 | 0 | 0 |
+// | Row 2 | 1 | 0 | 2 | 0 | 0 |
+// | Row 3 | 1 | 0 | 3 | 0 | 0 |
+// +---------+-----+-----+-----+-----+-----+

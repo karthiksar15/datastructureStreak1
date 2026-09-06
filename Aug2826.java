@@ -4,6 +4,15 @@ class Aug2826 {
         int[] prices = { 1, 3, 4, 0, 4 };
         System.out.println("maxProfit--->" + aug.maxProfit(prices));
     }
+    // The problem on your screen, Best Time to Buy and Sell Stock with Cooldown, is
+    // solved using a classic dynamic programming pattern known as State Machine (or
+    // Multi-State DP).
+
+    // Why the State Machine Pattern?
+    // In standard dynamic programming problems, you typically make a single choice
+    // at index i (e.g., take it or leave it). However, in stock problems with
+    // constraints like cooldowns or transaction fees, your available actions depend
+    // heavily on your current "state."
 
     public int maxProfit(int[] prices) {
         int n = prices.length;
@@ -24,3 +33,16 @@ class Aug2826 {
         return dp[0][1];
     }
 }
+
+// o/p
+
+// +---------+-----+-----+
+// | Index | 0 | 1 |
+// +---------+-----+-----+
+// | Row 0 | 7 | 6 |
+// | Row 1 | 7 | 4 |
+// | Row 2 | 4 | 4 |
+// | Row 3 | 4 | 4 |
+// | Row 4 | 4 | 0 |
+// | Row 5 | 0 | 0 |
+// +---------+-----+-----+

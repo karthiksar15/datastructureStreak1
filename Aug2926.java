@@ -8,6 +8,12 @@ class Aug2926 {
         System.out.println("change--->" + aug.change(amount, coins));
     }
 
+    // However, Coin Change II is an unbounded knapsack problem where you have an
+    // unlimited number of each coin. To allow picking the same coin multiple times,
+    // you must look at the result of using the same coin for the remaining amount,
+    // which requires dp[i][j - coins[i - 1]] (referencing the current row i rather
+    // than the previous row i - 1).
+
     public int change(int amount, int[] coins) {
         int n = coins.length;
         Arrays.sort(coins);
@@ -26,3 +32,14 @@ class Aug2926 {
         return dp[n][amount];
     }
 }
+
+// o/p:
+// 2D array
+// +---------+-----+-----+-----+-----+-----+
+// | Index | 0 | 1 | 2 | 3 | 4 |
+// +---------+-----+-----+-----+-----+-----+
+// | Row 0 | 1 | 0 | 0 | 0 | 0 |
+// | Row 1 | 1 | 1 | 1 | 1 | 1 |
+// | Row 2 | 1 | 1 | 2 | 2 | 3 |
+// | Row 3 | 1 | 1 | 2 | 3 | 4 |
+// +---------+-----+-----+-----+-----+-----+

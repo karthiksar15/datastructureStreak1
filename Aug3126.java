@@ -1,7 +1,7 @@
 public class Aug3126 {
 
     public static void main(String[] args) {
-        String s1 = "", s2 = "", s3 = "";
+        String s1 = "abc", s2 = "xyz", s3 = "abxzcy";
         Aug3126 aug = new Aug3126();
         System.out.println("isInterleave--->" + aug.isInterleave(s1, s2, s3));
     }
@@ -26,3 +26,13 @@ public class Aug3126 {
     }
 
 }
+
+// o/p:
+// +---------+-------+-------+-------+-------+
+// | Index | 0 | 1 | 2 | 3 |
+// +---------+-------+-------+-------+-------+
+// | Row 0 | false | false | false | false |
+// | Row 1 | false | false | false | false |
+// | Row 2 | false | false | false | false |
+// | Row 3 | false | false | false | true |
+// +---------+-------+-------+-------+-------+
