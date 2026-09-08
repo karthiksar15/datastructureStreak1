@@ -16,8 +16,10 @@ public class Sep07262 {
         int m = grid.length;
         int n = grid[0].length;
         int[][] dp = new int[m + 1][n + 1];
-        for (int[] d : dp) {
-            Arrays.fill(d, Integer.MAX_VALUE);
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                dp[i][j] = Integer.MAX_VALUE;
+            }
         }
         dp[m][n - 1] = 0;
         for (int i = m - 1; i >= 0; i--) {
