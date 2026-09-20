@@ -2,9 +2,9 @@ class Sep1426 {
 
     public static void main(String[] args) {
         Sep1426 sep = new Sep1426();
-        String s1 = "aaaa";
-        String s2 = "bbbb";
-        String s3 = "aabbbbaa";
+        String s1 = "abc";
+        String s2 = "xyz";
+        String s3 = "abxzcy";
         System.out.println("isInter--->" + sep.isInterleave(s1, s2, s3));
     }
 
