@@ -1,0 +1,32 @@
+class Oct07261 {
+    public static void main(String[] args) {
+        int[] nums = { 2, 2, 2 };
+        int target = 2;
+        Oct07261 oct = new Oct07261();
+        System.out.println("findTarget-->" + oct.findTargetSumWays(nums, target));
+    }
+
+    public int findTargetSumWays(int[] nums, int target) {
+        int n = nums.length;
+        int totalSum = 0;
+        for (int i = 0; i < n; i++) {
+            totalSum += nums[i];
+        }
+
+        if (Math.abs(target) > totalSum || (subset + target % 2) != 0)
+            return 0;
+
+        int subset = (totalSum + target) / 2;
+        int[][] dp = new int[n + 1][subset];
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= target; j++) {
+                dp[i][j] = dp[i - 1][j];
+                if (j >= nums[i - 1]) {
+                    dp[i][j] += dp[i - 1][j - nums[i - 1]];
+                }
+            }
+        }
+        return dp[n][target];
+    }
+}
