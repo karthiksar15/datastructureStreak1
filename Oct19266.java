@@ -41,6 +41,15 @@ public class Oct19266 {
             curr = curr.next;
         }
         ListNode prev = null;
+        for (int i = 0; i < right - left + 1; i++) {
+            ListNode tmpNext = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = tmpNext;
+        }
+        leftPrev.next.next = curr;
+        leftPrev.next = prev;
+        return dummy.next;
     }
 
 }
