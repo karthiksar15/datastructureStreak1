@@ -14,7 +14,7 @@ public class Oct21264 {
         int[] dp = new int[n + 1];
         Arrays.fill(dp, Integer.MIN_VALUE);
         dp[n] = 0;
-        for (int i = n - 1; i >= 0; i--) {
+        for (int i = 0; i < n; i++) {
             int tot = 0;
             for (int j = i; j < Math.min(i + 3, n); j++) {
                 tot += stoneValue[i];
