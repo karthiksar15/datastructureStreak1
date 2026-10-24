@@ -10,11 +10,11 @@ public class Oct24264 {
 
     public int combinationSum4(int[] nums, int target) {
         int n = nums.length;
-        int[][] dp = new int[n + 1][target + 1];
+        int[][] dp = new int[target + 1][n + 1];
         for (int[] d : dp) {
             d[0] = 1;
         }
-        for (int i = 1; i <= n; i++)
+        for (int i = 0; i <= n; i++)
             for (int j = 0; j <= target; j++) {
                 dp[i][j] = dp[i - 1][j];
                 if (j >= nums[i - 1]) {
