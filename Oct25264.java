@@ -1,7 +1,7 @@
 public class Oct25264 {
 
     public static void main(String[] args) {
-        String s = "caaat", t = "cat";
+        String s = "caaat", t = "bow";
         Oct25264 oct = new Oct25264();
         System.out.println("numDistinct-->" + oct.numDistinct(s, t));
     }
